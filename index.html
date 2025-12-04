@@ -1,727 +1,323 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Abdel_cameroun - Échange CFA ↔ Naira, Achat/Vente USDT BTC XRP SOL TRX. Basés à Garoua, disponible 24/24." />
-  <title>Abdel_cameroun — Change & Crypto | Garoua</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abdel_Cameroun Exchange</title>
 
-  <style>
-    /* ---------- Reset & base ---------- */
-    :root{
-      --bg1: #0f1724;
-      --bg2: #071229;
-      --glass: rgba(255,255,255,0.06);
-      --accent: linear-gradient(135deg,#06b6d4,#7c3aed);
-      --muted: rgba(255,255,255,0.65);
-      --card-radius: 14px;
-      --glass-2: rgba(255,255,255,0.03);
-      --success: #10b981;
-      --danger: #ef4444;
-      --shadow: 0 10px 30px rgba(2,6,23,0.6);
-    }
+<style>
+/* ---------- RESET & BASE ---------- */
+:root{
+  --bg1:#0f1724;
+  --bg2:#071229;
+  --accent:linear-gradient(135deg,#06b6d4,#7c3aed);
+  --muted:rgba(255,255,255,0.7);
+  --glass:rgba(255,255,255,0.08);
+  --radius:14px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.12), transparent),
-                  radial-gradient(900px 400px at 90% 90%, rgba(6,182,212,0.06), transparent),
-                  linear-gradient(180deg,var(--bg1),var(--bg2));
-      color:#eef2ff;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:32px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  padding-top:70px; /* header space */
+}
 
-    .container{
-      width:100%;
-      max-width:1100px;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns: 420px 1fr;
-      gap:28px;
-      align-items:start;
-    }
+/* ---------- HEADER ---------- */
+header{
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:1000;
+  background:rgba(3,10,25,0.8);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.navbar{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 20px;
+}
+.navbar .logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.navbar svg{
+  width:38px;height:38px;
+}
+.navbar h2 { font-size:18px; }
 
-    /* ---------- Sidebar / Branding ---------- */
-    .brand{
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      border-radius: var(--card-radius);
-      padding:24px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,0.04);
-      position:relative;
-      overflow:hidden;
-      min-height:520px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
+nav ul{
+  display:flex;
+  list-style:none;
+  gap:20px;
+}
+nav a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+  transition:.3s;
+}
+nav a:hover{ color:#fff; }
 
-    .logo{
-      display:flex;
-      gap:16px;
-      align-items:center;
-    }
-    .logo svg{width:64px;height:64px;flex-shrink:0}
-    .logo h1{font-size:20px;margin:0;letter-spacing:0.4px}
-    .subtitle{color:var(--muted); font-size:13px;margin-top:4px}
+.cta-nav{
+  background:var(--accent);
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:13px;
+  border:none;
+  cursor:pointer;
+}
 
-    .status{
-      margin-top:8px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
-    .pill{
-      padding:6px 10px;
-      border-radius:999px;
-      font-weight:600;
-      font-size:13px;
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-    }
-    .pill.live{background:linear-gradient(90deg,#10b98133,#06b6d433); color:var(--success); border:1px solid rgba(16,185,129,0.12)}
-    .pill.open{background:linear-gradient(90deg,#7c3aed33,#06b6d433); color:#7c3aed}
+/* ---------- BURGER MENU ---------- */
+.burger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+.burger div{
+  width:25px;
+  height:3px;
+  background:#fff;
+  border-radius:2px;
+}
 
-    .location{
-      margin-top:12px;
-      color:var(--muted);
-      font-size:14px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
+/* ---------- MAIN LAYOUT ---------- */
+.container{
+  max-width:1200px;
+  width:100%;
+  display:grid;
+  grid-template-columns:380px 1fr;
+  gap:22px;
+  padding:20px;
+}
 
-    .about{
-      margin-top:16px;
-      color:rgba(238,242,255,0.85);
-      font-size:14px;
-      line-height:1.5;
-    }
+.brand{
+  background:var(--glass);
+  padding:24px;
+  border-radius:var(--radius);
+  text-align:center;
+}
+.brand svg{ width:70px;height:70px; }
+.subtitle{ font-size:13px; color:var(--muted); margin-top:6px; }
 
-    /* Quick actions */
-    .actions{
-      margin-top:auto;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .btn{
-      padding:12px 14px;
-      border-radius:10px;
-      font-weight:700;
-      cursor:pointer;
-      border: none;
-      background: linear-gradient(90deg,#06b6d4,#7c3aed);
-      color:white;
-      box-shadow: 0 6px 18px rgba(124,58,237,0.18);
-      transition:transform .14s ease, box-shadow .14s ease;
-      text-decoration:none;
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06); box-shadow:none}
+.panel{
+  background:var(--glass);
+  padding:20px;
+  border-radius:var(--radius);
+  display:grid;
+  grid-template-columns:1fr 300px;
+  gap:18px;
+}
 
-    /* ---------- Main content ---------- */
-    .main{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius: var(--card-radius);
-      padding:22px;
-      min-height:520px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,0.03);
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
+.tabs{display:flex;gap:8px;margin-bottom:12px;}
+.tab{
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  border:1px solid var(--muted);
+  font-size:13px;
+}
+.tab.active{
+  background:var(--accent);
+  border:none;
+}
 
-    .tabs{
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
-    .tab{
-      padding:10px 14px;
-      border-radius:10px;
-      background:transparent;
-      color:var(--muted);
-      cursor:pointer;
-      border:1px solid transparent;
-      font-weight:700;
-    }
-    .tab.active{
-      color:white;
-      background: linear-gradient(90deg,#06b6d4,#7c3aed);
-      box-shadow: 0 8px 22px rgba(6,182,212,0.08);
-      transform:translateY(-2px);
-    }
+label{font-size:12px;}
+input,select{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:8px;
+}
 
-    .panel{
-      margin-top:6px;
-      display:grid;
-      grid-template-columns: 1fr 360px;
-      gap:18px;
-      align-items:start;
-    }
+.result{
+  background:#12263b;
+  padding:12px;
+  border-radius:12px;
+  margin-top:6px;
+  display:flex;
+  justify-content:space-between;
+}
+.result span:last-child{
+  font-size:20px;
+  font-weight:700;
+}
 
-    /* left column inside main */
-    .left-card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:18px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.02);
-    }
+.actions{display:flex;gap:10px;margin-top:10px;}
+.btn{
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+}
+.primary{background:var(--accent);}
+.secondary{
+  background:#1e293b;
+  border:1px solid #2f3b52;
+  color:var(--muted);
+}
 
-    .exchange-card{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
-    .input, select{
-      width:100%;
-      padding:12px 14px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,0.04);
-      background:transparent;
-      color:inherit;
-      font-size:15px;
-    }
+.rate,.crypto-card{
+  background:#12263b;
+  padding:14px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
 
-    .row{display:flex;gap:10px}
-    .half{flex:1}
+/* ---------- FOOTER ---------- */
+footer{
+  text-align:center;
+  margin-top:14px;
+  font-size:13px;
+  color:var(--muted);
+}
 
-    .result{
-      margin-top:8px;
-      padding:12px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:10px;
-      border:1px dashed rgba(255,255,255,0.03);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      font-weight:700;
-    }
-    .small{font-size:13px;color:var(--muted);font-weight:600}
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:1080px){
+  .container{grid-template-columns:1fr;}
+  .brand{order:2;}
+  .main{order:1;}
+}
+@media(max-width:880px){
+  .panel{grid-template-columns:1fr !important;}
+}
+@media(max-width:720px){
+  nav ul{
+    position:absolute;
+    top:58px;
+    right:0;
+    width:100%;
+    background:#091426f2;
+    flex-direction:column;
+    gap:16px;
+    padding:18px;
+    display:none;
+  }
+  nav ul.active{ display:flex; }
+  .burger{ display:flex; }
+}
+@media(max-width:540px){
+  .actions{flex-direction:column;}
+  .btn{width:100%;}
+  .tabs{flex-wrap:wrap;}
+  .tab{width:100%;text-align:center;}
+  .result{flex-direction:column;text-align:center;}
+}
+</style>
 
-    /* right column inside main (rates & crypto) */
-    .rates{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .rate-item{
-      padding:12px;
-      border-radius:10px;
-      background:var(--glass-2);
-      border:1px solid rgba(255,255,255,0.03);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-    .crypto-list{
-      display:grid;
-      gap:8px;
-    }
-    .crypto{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .coin-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.03);display:inline-flex;align-items:center;justify-content:center}
+<script>
+function toggleMenu(){
+  document.querySelector("nav ul").classList.toggle("active");
+}
+</script>
 
-    /* footer */
-    footer{margin-top:auto; font-size:13px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:10px}
-
-    /* small screens */
-    @media (max-width:980px){
-      body{padding:18px}
-      .container{grid-template-columns:1fr; max-width:900px}
-      .panel{grid-template-columns:1fr}
-      .brand{min-height:initial; order:2}
-      .main{order:1}
-    }
-
-    /* micro-animations */
-    .pulse{
-      animation:pulse 2s infinite;
-    }
-    @keyframes pulse{
-      0%{transform:scale(1);opacity:1}
-      50%{transform:scale(1.02);opacity:0.95}
-      100%{transform:scale(1);opacity:1}
-    }
-
-    /* small helpers */
-    .muted{color:var(--muted)}
-    .center{text-align:center}
-  </style>
 </head>
 <body>
-  <div class="container" role="main">
-    <!-- LEFT: Brand / Info -->
-    <aside class="brand" aria-label="Identité et contact">
-      <div class="logo">
-        <!-- simple SVG logo -->
-        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-          <defs>
-            <linearGradient id="g" x1="0" x2="1">
-              <stop offset="0" stop-color="#06b6d4"/>
-              <stop offset="1" stop-color="#7c3aed"/>
-            </linearGradient>
-          </defs>
-          <rect x="0" y="0" width="64" height="64" rx="12" fill="url(#g)"/>
-          <g transform="translate(9,9)" fill="white" opacity="0.98">
-            <path d="M15 0 L21 12 L9 12 Z" />
-            <circle cx="30" cy="32" r="6" />
-            <rect x="0" y="28" width="30" height="6" rx="3" />
-          </g>
-        </svg>
 
-        <div>
-          <h1>Abdel_cameroun</h1>
-          <div class="subtitle">Change & Crypto — Garoua, Cameroun</div>
-        </div>
-      </div>
+<!-- HEADER -->
+<header>
+  <div class="navbar">
+    <div class="logo">
+      <svg fill="none" stroke="white" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-width="2"
+        d="M12 20v-6m0 0l4-4m-4 4L8 10m10 10a8 8 0 11-16 0 8 8 0 0116 0z"/>
+      </svg>
+      <h2>Abdel_Cameroun</h2>
+    </div>
 
-      <div class="status" aria-hidden>
-        <div class="pill live" title="Disponible 24/24">● Disponible 24/24</div>
-        <div class="pill open">Services : CFA ↔ NGN · USDT · BTC · XRP · SOL · TRX</div>
-      </div>
+    <nav>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
 
-      <div class="location">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.2"/></svg>
-        <div>
-          <div style="font-weight:700">Garoua, Nord — Cameroun</div>
-          <div class="muted" style="font-size:13px">Présence locale · Retrait & envoi rapides</div>
-        </div>
-      </div>
+    <a href="https://wa.me/237000000000" class="cta-nav">WhatsApp</a>
 
-      <p class="about">
-        Nous facilitons l'échange d'argent FCFA ↔ Naira, ainsi que l'achat et la vente de cryptomonnaies populaires.
-        Transactions rapides, sécurisées et assistance 24/7 pour entreprises et particuliers à Garoua.
-      </p>
-
-      <div class="actions" role="navigation" aria-label="Actions rapides">
-        <a class="btn" href="#exchange" title="Faire un échange">
-          Échanger maintenant
-        </a>
-        <a class="btn ghost" href="#contact" title="Nous contacter">Contact</a>
-        <a class="btn" id="whatsappBtn" href="https://wa.me/237XXXXXXXXX?text=Bonjour%20Abdel_cameroun%20—%20Je%20souhaite%20informations" target="_blank" rel="noopener noreferrer" aria-label="Contacter via WhatsApp">
-          WhatsApp
-        </a>
-      </div>
-
-      <footer>
-        <div class="muted">© <strong>Abdel_cameroun</strong></div>
-        <div class="muted" id="liveClock" aria-live="polite">Heure locale — 24/24</div>
-      </footer>
-    </aside>
-
-    <!-- RIGHT: Main interactive area -->
-    <main class="main" aria-label="Contenu principal">
-      <nav class="tabs" role="tablist" aria-label="Onglets">
-        <button class="tab active" role="tab" aria-selected="true" data-tab="exchange">Échange & Calculatrice</button>
-        <button class="tab" role="tab" data-tab="crypto">Crypto</button>
-        <button class="tab" role="tab" data-tab="about">À propos</button>
-      </nav>
-
-      <section class="panel" id="panelArea">
-        <!-- Left column -->
-        <div class="left-card" id="exchange" tabindex="0">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-            <div>
-              <h2 style="margin:0">Calculatrice d'échange</h2>
-              <div class="small muted">CFA ↔ Naira • Estimation instantanée</div>
-            </div>
-            <div class="small muted">Spread appliqué : <strong id="spreadLabel">1.8%</strong></div>
-          </div>
-
-          <div class="exchange-card" style="margin-top:12px">
-            <div>
-              <label for="direction">Direction</label>
-              <select id="direction" class="input" aria-label="Direction d'échange">
-                <option value="cfa_to_ngn">CFA → Naira</option>
-                <option value="ngn_to_cfa">Naira → CFA</option>
-              </select>
-            </div>
-
-            <div class="row">
-              <div class="half">
-                <label for="amount">Montant</label>
-                <input id="amount" class="input" type="number" min="0" step="0.01" value="10000" />
-              </div>
-              <div class="half">
-                <label for="rate">Taux (exemple)</label>
-                <input id="rate" class="input" type="number" min="0" step="0.0001" value="3.45" />
-                <div class="small muted" style="margin-top:6px">Taux : 1 FCFA = X NGN (exemple). Remplacez par taux réel.</div>
-              </div>
-            </div>
-
-            <div style="display:flex;gap:10px;align-items:center">
-              <button class="btn" id="calcBtn">Calculer</button>
-              <button class="btn ghost" id="swapBtn" title="Inverser direction">Inverser</button>
-              <div style="margin-left:auto" class="muted small">Taux mis à jour : <span id="lastUpdate">statique</span></div>
-            </div>
-
-            <div class="result" aria-live="polite">
-              <div>
-                <div class="small muted">Vous recevrez</div>
-                <div id="receive" style="font-size:18px">—</div>
-              </div>
-              <div class="small muted" id="fees">Frais: —</div>
-            </div>
-
-            <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03)"/>
-
-            <div>
-              <h3 style="margin:0 0 6px 0">Convertisseur Crypto (exemple)</h3>
-              <div class="small muted">Prix indicatif — Acheter/Vendre USDT, BTC, XRP, SOL, TRX</div>
-              <div style="display:grid;gap:8px;margin-top:12px">
-                <div style="display:flex;gap:8px">
-                  <select id="cryptoSelect" class="input" style="width:40%">
-                    <option value="USDT">USDT</option>
-                    <option value="BTC">BTC</option>
-                    <option value="XRP">XRP</option>
-                    <option value="SOL">SOL</option>
-                    <option value="TRX">TRX</option>
-                  </select>
-                  <input id="cryptoAmount" class="input" type="number" min="0" step="0.0001" value="100" style="width:60%"/>
-                </div>
-                <div style="display:flex;gap:10px;">
-                  <button class="btn" id="cryptoCalc">Estimer valeur</button>
-                  <button class="btn ghost" id="cryptoMarket">Voir marché</button>
-                </div>
-                <div class="result">
-                  <div>
-                    <div class="small muted">Valeur estimée</div>
-                    <div id="cryptoValue">—</div>
-                  </div>
-                  <div class="small muted" id="cryptoRateDisplay">Prix unitaire: —</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right column -->
-        <aside class="rates" id="ratesColumn" aria-label="Taux et cryptos">
-          <div class="rate-item">
-            <div>
-              <div style="font-weight:800">Taux du marché (exemples)</div>
-              <div class="muted small">Remplacez par API en direct pour production</div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-weight:800" id="marketRateDisplay">1 FCFA = 3.45 NGN</div>
-              <div class="muted small" id="marketUpdate">Mise à jour : statique</div>
-            </div>
-          </div>
-
-          <div style="display:flex;justify-content:space-between;align-items:end">
-            <div style="font-weight:800">Cryptomonnaies (prix indicatifs)</div>
-            <div class="muted small">Prix en NGN</div>
-          </div>
-
-          <div class="crypto-list" id="cryptoList">
-            <!-- each .rate-item -->
-            <div class="rate-item crypto">
-              <div style="display:flex;gap:10px;align-items:center">
-                <div class="coin-icon">₮</div>
-                <div>
-                  <div style="font-weight:700">USDT</div>
-                  <div class="muted small">Tether (stablecoin)</div>
-                </div>
-              </div>
-              <div style="text-align:right">
-                <div style="font-weight:800" data-coin="USDT">~ 1550 NGN</div>
-              </div>
-            </div>
-
-            <div class="rate-item crypto">
-              <div style="display:flex;gap:10px;align-items:center">
-                <div class="coin-icon">Ƀ</div>
-                <div>
-                  <div style="font-weight:700">BTC</div>
-                  <div class="muted small">Bitcoin</div>
-                </div>
-              </div>
-              <div style="text-align:right">
-                <div style="font-weight:800" data-coin="BTC">~ 32,500,000 NGN</div>
-              </div>
-            </div>
-
-            <div class="rate-item crypto">
-              <div style="display:flex;gap:10px;align-items:center">
-                <div class="coin-icon">✕</div>
-                <div>
-                  <div style="font-weight:700">XRP</div>
-                  <div class="muted small">Ripple</div>
-                </div>
-              </div>
-              <div style="text-align:right">
-                <div style="font-weight:800" data-coin="XRP">~ 800 NGN</div>
-              </div>
-            </div>
-
-            <div class="rate-item crypto">
-              <div style="display:flex;gap:10px;align-items:center">
-                <div class="coin-icon">◎</div>
-                <div>
-                  <div style="font-weight:700">SOL</div>
-                  <div class="muted small">Solana</div>
-                </div>
-              </div>
-              <div style="text-align:right">
-                <div style="font-weight:800" data-coin="SOL">~ 56,000 NGN</div>
-              </div>
-            </div>
-
-            <div class="rate-item crypto">
-              <div style="display:flex;gap:10px;align-items:center">
-                <div class="coin-icon">Ｔ</div>
-                <div>
-                  <div style="font-weight:700">TRX</div>
-                  <div class="muted small">TRON</div>
-                </div>
-              </div>
-              <div style="text-align:right">
-                <div style="font-weight:800" data-coin="TRX">~ 21 NGN</div>
-              </div>
-            </div>
-          </div>
-
-          <div style="margin-top:8px">
-            <button class="btn" id="refreshBtn">Mettre à jour (ex. API)</button>
-            <button class="btn ghost" id="faqBtn">FAQ & Conditions</button>
-          </div>
-
-        </aside>
-      </section>
-
-      <section id="contact" style="margin-top:12px">
-        <div style="display:flex;gap:12px;align-items:center">
-          <div style="flex:1">
-            <h3 style="margin:0">Contactez-nous</h3>
-            <p class="muted" style="margin:6px 0 0 0">Basés à Garoua — disponible 24/24. Utilisez le formulaire ou WhatsApp.</p>
-          </div>
-          <div style="display:flex;gap:8px">
-            <a class="btn" href="mailto:contact@abdel_cameroun.example?subject=Demande%20de%20taux" title="Envoyer un email">Email</a>
-            <a class="btn ghost" id="openMap" href="#" title="Voir localisation (plan)">Voir localisation</a>
-          </div>
-        </div>
-
-        <form id="contactForm" style="margin-top:12px;display:grid;grid-template-columns:1fr 280px;gap:12px">
-          <div>
-            <label for="name">Nom</label>
-            <input id="name" class="input" required />
-            <label for="email" style="margin-top:8px">Email / Téléphone</label>
-            <input id="email" class="input" required />
-            <label for="message" style="margin-top:8px">Message</label>
-            <textarea id="message" class="input" rows="4" placeholder="Ex: Je veux échanger 10000 FCFA"></textarea>
-            <div style="margin-top:8px;display:flex;gap:8px">
-              <button type="submit" class="btn">Envoyer</button>
-              <button type="reset" class="btn ghost">Réinitialiser</button>
-            </div>
-            <div id="contactNotice" class="muted small" style="margin-top:8px">Le formulaire est côté client : configurez un backend ou mailto: pour envoyer réellement.</div>
-          </div>
-
-          <aside style="padding:12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)">
-            <div style="font-weight:800">Informations</div>
-            <div class="muted small" style="margin-top:8px">
-              Adresse : Garoua, Nord, Cameroun<br>
-              Disponibilité : <strong>24/24</strong><br>
-              Services : Change, Achat/Vente crypto, Conseils transfert
-            </div>
-            <div style="margin-top:14px">
-              <div class="muted small">Téléphone / WhatsApp</div>
-              <div style="font-weight:800">+237 XXXXXXXXX</div>
-            </div>
-          </aside>
-        </form>
-      </section>
-    </main>
+    <div class="burger" onclick="toggleMenu()">
+      <div></div><div></div><div></div>
+    </div>
   </div>
+</header>
 
-  <script>
-    // ---------- Static example values (Replace with live API) ----------
-    // Important: these are illustrative examples only
-    const SAMPLE_MARKET_RATE = 3.45; // 1 FCFA = 3.45 NGN (example)
-    const SAMPLE_SPREAD_PERCENT = 1.8; // 1.8% fees/spread
-    const SAMPLE_CRYPTO_PRICES_NGN = {
-      "USDT": 1550,
-      "BTC": 32500000,
-      "XRP": 800,
-      "SOL": 56000,
-      "TRX": 21
-    };
+<!-- CONTENT -->
+<div class="container">
+  
+  <aside class="brand">
+    <svg fill="none" stroke="white" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-width="2"
+      d="M12 20v-6m0 0l4-4m-4 4L8 10m10 10a8 8 0 11-16 0 8 8 0 0116 0z"/>
+    </svg>
+    <h1>Abdel_Cameroun Exchange</h1>
+    <p class="subtitle">Échange CFA ↔ NGN • Crypto • Garoua • 24/24</p>
+  </aside>
 
-    // ---------- DOM ----------
-    const direction = document.getElementById('direction');
-    const amount = document.getElementById('amount');
-    const rate = document.getElementById('rate');
-    const calcBtn = document.getElementById('calcBtn');
-    const receive = document.getElementById('receive');
-    const fees = document.getElementById('fees');
-    const spreadLabel = document.getElementById('spreadLabel');
-    const lastUpdate = document.getElementById('lastUpdate');
-    const marketRateDisplay = document.getElementById('marketRateDisplay');
-    const marketUpdate = document.getElementById('marketUpdate');
-    const swapBtn = document.getElementById('swapBtn');
-    const cryptoSelect = document.getElementById('cryptoSelect');
-    const cryptoAmount = document.getElementById('cryptoAmount');
-    const cryptoCalc = document.getElementById('cryptoCalc');
-    const cryptoValue = document.getElementById('cryptoValue');
-    const cryptoRateDisplay = document.getElementById('cryptoRateDisplay');
-    const refreshBtn = document.getElementById('refreshBtn');
-    const tabs = document.querySelectorAll('.tab');
-    const panelArea = document.getElementById('panelArea');
+  <main class="main">
+    <div class="panel">
+      <div>
+        <div class="tabs">
+          <div class="tab active">CFA → NGN</div>
+          <div class="tab">NGN → CFA</div>
+        </div>
 
-    // Initialize UI values
-    rate.value = SAMPLE_MARKET_RATE;
-    spreadLabel.innerText = SAMPLE_SPREAD_PERCENT + '%';
-    marketRateDisplay.innerText = `1 FCFA = ${SAMPLE_MARKET_RATE} NGN`;
-    marketUpdate.innerText = 'statique';
-    lastUpdate.innerText = 'statique';
+        <label>Montant :</label>
+        <input type="number" placeholder="Ex : 50000">
 
-    // ---------- Utility: precise arithmetic for display ----------
-    function formatNumber(n){
-      if (Math.abs(n) >= 1000000) return n.toLocaleString();
-      if (Math.abs(n) >= 1000) return n.toLocaleString();
-      return Number(n.toFixed(2)).toLocaleString();
-    }
+        <label>Cryptomonnaie :</label>
+        <select>
+          <option>USDT</option>
+          <option>BTC</option>
+          <option>XRP</option>
+          <option>SOLANA</option>
+          <option>TRX</option>
+        </select>
 
-    // Perform exchange calculation
-    function calculateExchange(){
-      const dir = direction.value;
-      const amt = parseFloat(amount.value || 0);
-      let r = parseFloat(rate.value || SAMPLE_MARKET_RATE);
-      const spread = SAMPLE_SPREAD_PERCENT / 100.0;
+        <div class="result">
+          <span>Résultat :</span>
+          <span>00.00</span>
+        </div>
 
-      // Apply spread: when customer receives (sell/buy) we deduct spread accordingly.
-      // This is a simple model: "you receive = converted_amount * (1 - spread)"
-      if (isNaN(amt) || amt <= 0){ receive.innerText = 'Entrer un montant valide'; fees.innerText = ''; return; }
-      if (isNaN(r) || r <= 0){ receive.innerText = 'Taux invalide'; fees.innerText = ''; return; }
+        <div class="actions">
+          <button class="btn primary">Convertir</button>
+          <button class="btn secondary">Réinitialiser</button>
+        </div>
+      </div>
 
-      let converted = 0;
-      let fee = 0;
+      <div>
+        <div class="rate"><strong>Taux :</strong><br>1 CFA = 0.96 NGN</div>
+        <div class="rate"><strong>USDT :</strong><br>Achat & Vente rapide</div>
+        <div class="rate"><strong>BTC / XRP / SOL / TRX :</strong><br>Taux mis à jour</div>
+      </div>
+    </div>
 
-      // cfa_to_ngn: multiply by rate (1 FCFA -> X NGN)
-      if (dir === 'cfa_to_ngn'){
-        converted = amt * r;
-        fee = converted * spread;
-        const after = converted - fee;
-        receive.innerText = `${formatNumber(after)} NGN`;
-        fees.innerText = `Frais ≈ ${formatNumber(fee)} NGN (${SAMPLE_SPREAD_PERCENT}%)`;
-      } else {
-        // ngn_to_cfa: convert back: 1 FCFA = r NGN -> 1 NGN = 1/r FCFA
-        const fcfaPerNgn = 1 / r;
-        converted = amt * fcfaPerNgn;
-        fee = converted * spread;
-        const after = converted - fee;
-        receive.innerText = `${formatNumber(after)} FCFA`;
-        fees.innerText = `Frais ≈ ${formatNumber(fee)} FCFA (${SAMPLE_SPREAD_PERCENT}%)`;
-      }
-    }
+    <div class="crypto-card">
+      💳 Achat & Vente instantanée de cryptomonnaies !
+    </div>
 
-    // crypto estimation
-    function calculateCrypto(){
-      const coin = cryptoSelect.value;
-      const qty = parseFloat(cryptoAmount.value || 0);
-      const price = SAMPLE_CRYPTO_PRICES_NGN[coin] || 0;
-      if (qty <= 0){ cryptoValue.innerText = 'Entrer une quantité valide'; cryptoRateDisplay.innerText = ''; return; }
-      const total = qty * price;
-      cryptoValue.innerText = `${formatNumber(total)} NGN`;
-      cryptoRateDisplay.innerText = `Prix unitaire ~ ${formatNumber(price)} NGN`;
-    }
+    <a id="contact" href="https://wa.me/237000000000"
+       class="btn primary" style="text-align:center;display:block;">
+      📲 Contact WhatsApp
+    </a>
 
-    // handlers
-    calcBtn.addEventListener('click', calculateExchange);
-    cryptoCalc.addEventListener('click', calculateCrypto);
+    <footer>
+      © 2025 Abdel_Cameroun — Garoua 🇨🇲 • Disponible 24/24
+    </footer>
 
-    swapBtn.addEventListener('click', ()=>{
-      const sel = direction.value;
-      direction.value = sel === 'cfa_to_ngn' ? 'ngn_to_cfa' : 'cfa_to_ngn';
-      // quick swap rate display placeholder (could invert for convenience)
-      rate.value = Number(rate.value) ? (1 / Number(rate.value)).toFixed(4) : rate.value;
-      calculateExchange();
-    });
+  </main>
+</div>
 
-    // Tab switching (simple)
-    tabs.forEach(t=>{
-      t.addEventListener('click', ()=>{
-        tabs.forEach(x=>x.classList.remove('active'));
-        t.classList.add('active');
-        // focus panel parts if needed
-        const target = t.getAttribute('data-tab');
-        // scroll to corresponding element
-        if (target === 'exchange') { document.getElementById('exchange').scrollIntoView({behavior:'smooth', block:'start'}); }
-        if (target === 'crypto') { cryptoSelect.focus(); }
-      });
-    });
-
-    // Refresh button placeholder: in production, call API to update rates
-    refreshBtn.addEventListener('click', ()=>{
-      // This UI illustrates how to update: replace with fetch(...) to your rates API
-      marketUpdate.innerText = 'mise à jour simulée';
-      lastUpdate.innerText = new Date().toLocaleString();
-      // Example: update displayed market rate slightly for UX demo:
-      const jitter = (Math.random()*0.06 - 0.03).toFixed(3);
-      const newRate = (SAMPLE_MARKET_RATE * (1 + parseFloat(jitter))).toFixed(4);
-      rate.value = newRate;
-      marketRateDisplay.innerText = `1 FCFA = ${newRate} NGN`;
-    });
-
-    // contact form: simple client-side handler
-    const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const n = document.getElementById('name').value.trim();
-      const em = document.getElementById('email').value.trim();
-      const msg = document.getElementById('message').value.trim();
-      if (!n || !em){
-        alert('Veuillez fournir votre nom et contact.');
-        return;
-      }
-      // Simple mailto fallback (user must have mail client configured)
-      const mailto = `mailto:contact@abdel_cameroun.example?subject=Nouveau%20message%20de%20${encodeURIComponent(n)}&body=${encodeURIComponent(msg + "\\n\\nContact: " + em)}`;
-      window.location.href = mailto;
-    });
-
-    // WhatsApp button fallback: (update phone number in markup)
-    document.getElementById('whatsappBtn').addEventListener('click', ()=>{
-      // nothing else — link opens new tab
-    });
-
-    // Live clock display (local time in user's browser)
-    const liveClock = document.getElementById('liveClock');
-    function updateClock(){
-      const now = new Date();
-      // Format hh:mm (24h)
-      const hh = String(now.getHours()).padStart(2,'0');
-      const mm = String(now.getMinutes()).padStart(2,'0');
-      liveClock.innerText = `Heure locale : ${hh}:${mm}`;
-    }
-    updateClock();
-    setInterval(updateClock, 30*1000);
-
-    // Auto-calc initial
-    calculateExchange();
-    calculateCrypto();
-
-    // Accessibility: focus outline styles (keep visible for keyboard)
-    document.addEventListener('keydown', (e)=>{
-      if (e.key === 'Tab') document.documentElement.classList.add('show-focus');
-    });
-  </script>
 </body>
 </html>
