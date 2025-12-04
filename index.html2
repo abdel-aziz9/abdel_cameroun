@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abdel_Cameroun Exchange</title>
+
+<style>
+/* ---------- RESET & BASE ---------- */
+:root{
+  --bg1:#0f1724;
+  --bg2:#071229;
+  --accent:linear-gradient(135deg,#06b6d4,#7c3aed);
+  --muted:rgba(255,255,255,0.7);
+  --glass:rgba(255,255,255,0.08);
+  --radius:14px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  padding-top:70px; /* header space */
+}
+
+/* ---------- HEADER ---------- */
+header{
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:1000;
+  background:rgba(3,10,25,0.8);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.navbar{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 20px;
+}
+.navbar .logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.navbar svg{
+  width:38px;height:38px;
+}
+.navbar h2 { font-size:18px; }
+
+nav ul{
+  display:flex;
+  list-style:none;
+  gap:20px;
+}
+nav a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+  transition:.3s;
+}
+nav a:hover{ color:#fff; }
+
+.cta-nav{
+  background:var(--accent);
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:13px;
+  border:none;
+  cursor:pointer;
+}
+
+/* ---------- BURGER MENU ---------- */
+.burger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+.burger div{
+  width:25px;
+  height:3px;
+  background:#fff;
+  border-radius:2px;
+}
+
+/* ---------- MAIN LAYOUT ---------- */
+.container{
+  max-width:1200px;
+  width:100%;
+  display:grid;
+  grid-template-columns:380px 1fr;
+  gap:22px;
+  padding:20px;
+}
+
+.brand{
+  background:var(--glass);
+  padding:24px;
+  border-radius:var(--radius);
+  text-align:center;
+}
+.brand svg{ width:70px;height:70px; }
+.subtitle{ font-size:13px; color:var(--muted); margin-top:6px; }
+
+.panel{
+  background:var(--glass);
+  padding:20px;
+  border-radius:var(--radius);
+  display:grid;
+  grid-template-columns:1fr 300px;
+  gap:18px;
+}
+
+.tabs{display:flex;gap:8px;margin-bottom:12px;}
+.tab{
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  border:1px solid var(--muted);
+  font-size:13px;
+}
+.tab.active{
+  background:var(--accent);
+  border:none;
+}
+
+label{font-size:12px;}
+input,select{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:8px;
+}
+
+.result{
+  background:#12263b;
+  padding:12px;
+  border-radius:12px;
+  margin-top:6px;
+  display:flex;
+  justify-content:space-between;
+}
+.result span:last-child{
+  font-size:20px;
+  font-weight:700;
+}
+
+.actions{display:flex;gap:10px;margin-top:10px;}
+.btn{
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+}
+.primary{background:var(--accent);}
+.secondary{
+  background:#1e293b;
+  border:1px solid #2f3b52;
+  color:var(--muted);
+}
+
+.rate,.crypto-card{
+  background:#12263b;
+  padding:14px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  text-align:center;
+  margin-top:14px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:1080px){
+  .container{grid-template-columns:1fr;}
+  .brand{order:2;}
+  .main{order:1;}
+}
+@media(max-width:880px){
+  .panel{grid-template-columns:1fr !important;}
+}
+@media(max-width:720px){
+  nav ul{
+    position:absolute;
+    top:58px;
+    right:0;
+    width:100%;
+    background:#091426f2;
+    flex-direction:column;
+    gap:16px;
+    padding:18px;
+    display:none;
+  }
+  nav ul.active{ display:flex; }
+  .burger{ display:flex; }
+}
+@media(max-width:540px){
+  .actions{flex-direction:column;}
+  .btn{width:100%;}
+  .tabs{flex-wrap:wrap;}
+  .tab{width:100%;text-align:center;}
+  .result{flex-direction:column;text-align:center;}
+}
+</style>
+
+<script>
+function toggleMenu(){
+  document.querySelector("nav ul").classList.toggle("active");
+}
+</script>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="navbar">
+    <div class="logo">
+      <svg fill="none" stroke="white" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-width="2"
+        d="M12 20v-6m0 0l4-4m-4 4L8 10m10 10a8 8 0 11-16 0 8 8 0 0116 0z"/>
+      </svg>
+      <h2>Abdel_Cameroun</h2>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <a href="https://wa.me/237000000000" class="cta-nav">WhatsApp</a>
+
+    <div class="burger" onclick="toggleMenu()">
+      <div></div><div></div><div></div>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENT -->
+<div class="container">
+  
+  <aside class="brand">
+    <svg fill="none" stroke="white" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-width="2"
+      d="M12 20v-6m0 0l4-4m-4 4L8 10m10 10a8 8 0 11-16 0 8 8 0 0116 0z"/>
+    </svg>
+    <h1>Abdel_Cameroun Exchange</h1>
+    <p class="subtitle">Échange CFA ↔ NGN • Crypto • Garoua • 24/24</p>
+  </aside>
+
+  <main class="main">
+    <div class="panel">
+      <div>
+        <div class="tabs">
+          <div class="tab active">CFA → NGN</div>
+          <div class="tab">NGN → CFA</div>
+        </div>
+
+        <label>Montant :</label>
+        <input type="number" placeholder="Ex : 50000">
+
+        <label>Cryptomonnaie :</label>
+        <select>
+          <option>USDT</option>
+          <option>BTC</option>
+          <option>XRP</option>
+          <option>SOLANA</option>
+          <option>TRX</option>
+        </select>
+
+        <div class="result">
+          <span>Résultat :</span>
+          <span>00.00</span>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary">Convertir</button>
+          <button class="btn secondary">Réinitialiser</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="rate"><strong>Taux :</strong><br>1 CFA = 0.96 NGN</div>
+        <div class="rate"><strong>USDT :</strong><br>Achat & Vente rapide</div>
+        <div class="rate"><strong>BTC / XRP / SOL / TRX :</strong><br>Taux mis à jour</div>
+      </div>
+    </div>
+
+    <div class="crypto-card">
+      💳 Achat & Vente instantanée de cryptomonnaies !
+    </div>
+
+    <a id="contact" href="https://wa.me/237000000000"
+       class="btn primary" style="text-align:center;display:block;">
+      📲 Contact WhatsApp
+    </a>
+
+    <footer>
+      © 2025 Abdel_Cameroun — Garoua 🇨🇲 • Disponible 24/24
+    </footer>
+
+  </main>
+</div>
+
+</body>
+</html>
