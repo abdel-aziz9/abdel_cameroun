@@ -5,24 +5,159 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Abdel Cameroun Exchange</title>
 <style>
-/* ... styles unchanged ... */
 :root{
-  --bg1:#18325c;
-  --bg2:#071229;
-  --accent:linear-gradient(135deg,#06b6d4,#7c3aed);
-  --muted:rgba(255,255,255,0.82);
-  --radius:14px;
+  --bg1:#14243e;
+  --bg2:#09121e;
+  --primary:#06b6d4;
+  --accent:#7c3aed;
+  --muted:#d8e8ff;
+  --radius:16px;
 }
 body{
-  font-family:Arial, sans-serif;
+  font-family:'Segoe UI',Arial,sans-serif;
   background:linear-gradient(180deg,var(--bg1),var(--bg2));
-  color:#fff;
+  color:var(--muted);
   margin:0; padding:0;
   min-height:100vh;
   display:flex;
   flex-direction:column;
 }
-/* ... rest of style ... */
+header{
+  background:rgba(22,36,71,0.97);
+  box-shadow:0 2px 14px #001b;
+}
+.header-content{
+  max-width:1120px;margin:auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 4vw 10px 4vw;
+  flex-wrap:wrap;
+}
+.logo{
+  font-size:1.4rem;
+  font-weight:600;
+  letter-spacing:2px;
+  color:var(--primary);
+  background: linear-gradient(90deg,var(--primary),var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+nav{display:flex;gap:22px;}
+nav a{
+  color:var(--muted);text-decoration:none;font-size:1rem;font-weight:500;letter-spacing:1px;
+  padding:7px 0;border-bottom:2px solid transparent;
+  transition:.18s;
+}
+nav a:hover{color:#fff;border-bottom:2px solid var(--primary);}
+.admin-link{color:#f6c;}
+main{
+  width:94%;max-width:440px;
+  margin:38px auto 0 auto;padding:24px 18px;
+  background:rgba(255,255,255,0.076);
+  border-radius:var(--radius); 
+  box-shadow:0 4px 24px #0004;
+  display:flex;flex-direction:column;gap:10px;
+}
+h1{
+  text-align:center;
+  margin-bottom:8px;
+  font-size:1.3rem;
+  color:#fff;
+}
+.form-group{margin-bottom:8px;}
+label{display:block;margin-bottom:4px;font-weight:500;}
+select,
+input[type=number]{
+  width:100%;
+  padding:13px;
+  border-radius:10px;
+  border:none;
+  box-shadow:0 1px 3px #0002;
+  outline:none;
+  background:#162447d0;
+  color:#fff;
+  font-size:1rem;
+  transition:.17s;
+}
+select:focus,input[type=number]:focus{background:#162447ee;}
+.result{
+  background:rgba(34,58,112,0.93);
+  border-radius:12px;
+  padding:18px 12px 12px 12px;
+  margin:12px 0 7px 0;
+  text-align:center;
+  color:#fff;
+  box-shadow:0 1px 7px #0002;
+  font-weight:500;
+  font-size:1.08rem;
+  min-height:36px;
+  transition:background .2s;
+}
+.btn{
+  padding:13px 0;
+  width:100%;
+  border:0;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:1.06rem;
+  font-weight:600;
+  letter-spacing:1px;
+  background:var(--primary);
+  color:#fff;
+  margin-top:6px;
+  margin-bottom:3px;
+  transition:background .23s,box-shadow .23s;
+  box-shadow:0 2px 10px #06b6d450;
+}
+.btn.secondary{
+  background:#22314bc0;
+  color:#e3e6ff;
+  margin-top:10px;
+}
+.btn:hover{background:var(--accent);}
+.payment-info{
+  background:#1a2740b3;
+  border-radius:11px;
+  padding:13px 13px 9px 13px;
+  margin-top:8px;
+  font-size:0.97rem;
+  color:#bae1fa;
+}
+.upload-group{
+  margin-top:16px;
+  padding:15px 8px 6px 8px;
+  border-radius:10px;
+  background:rgba(31,37,60,0.53);
+  box-shadow:0 2px 5px #0001;
+}
+.upload-group label{font-size:.97rem;}
+.upload-group input[type=file]{
+  width:100%;margin-top:7px;padding:7px;
+  border-radius:7px;background:#253958;color:#fff;border:none;
+}
+#uploadMsg {
+  margin-top:9px;
+  color:#30d7ff;
+  font-size:0.97rem;
+}
+footer{
+  width:100%;
+  text-align:center;padding:17px 8vw 15px 8vw;
+  color:var(--muted);
+  font-size:.97rem;
+  background:#111f28;
+  margin-top:auto;
+  box-shadow:0 -2px 16px #001d;
+}
+footer a{color:#97f7ff;font-weight:600;}
+@media(max-width:700px){
+  main{padding:13px;width:95vw;max-width:98vw;}
+}
+@media(max-width:530px){
+  .header-content{flex-direction:column;gap:2px;}
+  nav{gap:11px;margin-top:7px;}
+  main{margin-top:12vw;}
+  .logo{font-size:1.1rem;}
+}
 </style>
 </head>
 <body>
@@ -33,14 +168,11 @@ body{
       <a href="#">Accueil</a>
       <a href="#rates">Taux</a>
       <a href="#order">Commander</a>
-      <!-- Add link to admin page (optional for you) -->
-      <a href="admin.html" style="color:#e9e;">Admin</a>
+      <a href="admin.html" class="admin-link">Admin</a>
     </nav>
   </div>
 </header>
-
 <main>
-  <!-- ... (no changes inside main) ... -->
   <h1>Échange Multi-Devises</h1>
   <div class="form-group">
     <label for="fromCurrency">Monnaie d'origine</label>
@@ -80,18 +212,18 @@ body{
     <label for="receipt">Téléchargez votre reçu de paiement</label>
     <input type="file" id="receipt" accept="image/*,application/pdf">
     <button class="btn secondary" onclick="sendToWhatsApp()">Envoyer le reçu sur WhatsApp</button>
-    <div id="uploadMsg" style="margin-top:7px;color:#29d;font-size:13px;"></div>
+    <div id="uploadMsg"></div>
   </div>
 </main>
 
 <footer>
   © 2025 Abdel Cameroun Exchange | Garoua 🇨🇲 | Disponible 24/24<br>
-  📱 WhatsApp: <a href="https://wa.me/237694623940" style="color:#93f;">+237 694623940</a>
+  📱 WhatsApp: <a href="https://wa.me/237694623940">+237 694623940</a>
 </footer>
 
 <script>
-// Example live rates, in real app update automatically from backend/API
-const rates = {
+// Load rates from localStorage (set by admin), else use defaults
+const defaultRates = {
   "CFA": 1,
   "NGN": 0.22,
   "XOF": 1,
@@ -101,7 +233,15 @@ const rates = {
   "TRX": 0.3,
   "SOL": 0.00003
 };
-// Payment instructions (customize for your business)
+
+function getRates() {
+  try {
+    const stored = JSON.parse(localStorage.getItem('exchangeRates'));
+    return stored ? {CFA:1, ...stored} : defaultRates;
+  } catch { return defaultRates; }
+}
+let rates = getRates();
+
 const paymentInstructions = {
   "CFA": "Envoyez via MTN Mobile Money ou ORANGE Money.",
   "NGN": "Paiement par compte bancaire ou crypto.",
@@ -114,6 +254,7 @@ const paymentInstructions = {
 };
 
 function convertCurrency() {
+  rates = getRates(); // Reload in case changed by admin
   const from = document.getElementById("fromCurrency").value;
   const to = document.getElementById("toCurrency").value;
   const amt = parseFloat(document.getElementById("amount").value) || 0;
@@ -128,31 +269,26 @@ function convertCurrency() {
     return;
   }
   let result = amt * (rates[to]/rates[from]);
-  document.getElementById("exchangeResult").innerHTML = 
+  document.getElementById("exchangeResult").innerHTML =
     `<b>${amt} ${from}</b> = <b>${result.toLocaleString(undefined,{maximumFractionDigits:2})} ${to}</b>`;
-  document.getElementById("paymentInfo").innerText = 
+  document.getElementById("paymentInfo").innerText =
     `Instructions: ${paymentInstructions[from]}\nAprès le paiement, uploadez votre reçu ci-dessous.`;
 }
 
-// Simulate sending to WhatsApp: opens WhatsApp with message including customer info, with receipt information
 function sendToWhatsApp(){
   const amount = document.getElementById("amount").value;
   const from = document.getElementById("fromCurrency").value;
   const to = document.getElementById("toCurrency").value;
   const receiptFile = document.getElementById("receipt").files[0];
-
   if(!amount || from === to || !receiptFile){
     document.getElementById("uploadMsg").innerText = "Veuillez remplir le formulaire et télécharger le reçu.";
     return;
   }
-
-  // Upload not supported directly: Instead, prompt message to send to WhatsApp
-  let message = `Bonjour Abdel, je viens de faire un paiement pour un échange.\nMontant: ${amount} ${from}\nÀ échanger contre: ${to}\nJe joins le reçu du paiement.`;
+  let message =
+    `Bonjour Abdel, je viens de faire un paiement pour un échange.\nMontant: ${amount} ${from}\nÀ échanger contre: ${to}\nJe joins le reçu du paiement.`;
   let whatsappURL = `https://wa.me/237694623940?text=${encodeURIComponent(message)}`;
-  document.getElementById("uploadMsg").innerHTML = `Cliquez ici : <a href="${whatsappURL}" target="_blank">Envoyez sur WhatsApp</a> puis joignez le fichier reçu dans WhatsApp.`;
-  if(receiptFile){
-    document.getElementById("uploadMsg").innerHTML += `<br>Reçu sélectionné : <b>${receiptFile.name}</b>`;
-  }
+  document.getElementById("uploadMsg").innerHTML =
+    `Cliquez ici : <a href="${whatsappURL}" target="_blank">Envoyez sur WhatsApp</a> puis joignez le fichier reçu dans WhatsApp.<br>Reçu sélectionné : <b>${receiptFile.name}</b>`;
 }
 </script>
 </body>
