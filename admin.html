@@ -5,38 +5,171 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin | Abdel Cameroun Exchange</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg,#18325c,#071229);
-      color: #fff;
-      margin: 0; padding: 0;
-      min-height: 100vh; display: flex; flex-direction: column;
-    }
-    main {
-      max-width: 480px;
-      margin: 60px auto; padding: 26px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 16px; box-shadow: 0 2px 18px #0003;
-    }
-    h2{text-align: center;}
-    label{display:block;margin-bottom:4px;}
-    input[type=number]{
-      width:100%;padding:10px;margin-bottom:12px;
-      border-radius:8px;border:none;
-      background: #fff; color: #222;
-    }
-    .btn{padding:12px 30px;border:0;border-radius:10px;cursor:pointer;font-size:17px;background:#06b6d4;color:#fff;}
-    .rates-table{margin-bottom:18px;}
-    .rates-table td{padding:7px;}
-    .success{color:#59f;margin:12px 0;}
-    .footer{text-align:center;margin-top:auto;padding:16px;color:rgba(255,255,255,0.7);}
-    @media(max-width:600px){main{padding:8px;}}
+:root{
+  --bg1:#14243e;
+  --bg2:#09121e;
+  --primary:#06b6d4;
+  --accent:#7c3aed;
+  --muted:#d8e8ff;
+  --radius:16px;
+}
+body{
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--muted);
+  margin:0;padding:0;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+}
+main{
+  max-width:474px;width:94vw;
+  margin:48px auto 0 auto;padding:24px 13px 18px 13px;
+  background:rgba(255,255,255,0.07);
+  border-radius:var(--radius);
+  box-shadow:0 6px 32px #0005;
+  display:flex;flex-direction:column;align-items:center;
+  gap:12px;
+}
+h2{
+  text-align:center;
+  margin-bottom:12px;
+  color:#fff;
+  font-size:1.15rem;
+}
+.rates-table{
+  width:100%;
+  margin:0 0 16px 0;
+  border-radius:10px;
+  background:rgba(20,36,62,0.15);
+  border-collapse:separate;
+  border-spacing:0 7px;
+}
+.rates-table label{
+  font-size:1.01rem;
+}
+.rates-table td{
+  padding:9px 0 2px 2px;
+}
+input[type=number]{
+  width:95%;padding:11px;border-radius:8px;
+  font-size:1.08rem;
+  border:none;background:#173460;color:#fff;
+  box-shadow:0 1px 3px #0002;outline:none;
+  transition:.15s;
+}
+input[type=number]:focus{background:#233c65;}
+.btn{
+  padding:13px 19px;
+  border:0;border-radius:10px;
+  cursor:pointer;
+  font-size:1.04rem;
+  background:var(--primary);color:#fff;
+  margin-bottom:6px;
+  font-weight:600;letter-spacing:1px;
+  box-shadow:0 2px 12px #06b6d450;
+  transition:background .2s;
+}
+.btn:hover{background:var(--accent);}
+.success{
+  color:#63e6be;margin:11px 0;font-size:1.03rem;
+  min-height:20px;
+}
+ul{
+  margin-top:4px;
+  padding-left:21px;
+  font-size:.96rem;
+  color:#b6dfff;
+}
+.footer{
+  width:100%;
+  text-align:center;
+  margin-top:auto;
+  padding:15px 0 15px 0;
+  color:#a3bbe8;
+  background:#0d181e;
+}
+.footer a{color:var(--primary);}
+.login-overlay{
+  position:fixed;z-index:30;top:0;left:0;width:100vw;height:100vh;
+  background:rgba(10,18,33,0.93);
+  display:flex;justify-content:center;align-items:center;
+  transition:.2s;box-sizing:border-box;
+}
+.login-box{
+  background:rgba(255,255,255,0.08);
+  padding:33px 27px 25px 27px;
+  border-radius:19px;
+  box-shadow:0 2px 24px #0006;
+  min-width:270px;max-width:94vw;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:left;
+}
+.login-title{
+  color:#fff;
+  margin-bottom:8px;
+  font-size:1.17rem;
+  letter-spacing:1px;
+  font-weight:600;
+  text-align:center;
+}
+.login-label{color:var(--muted); font-size:.99rem; margin-bottom:3px;}
+.login-box input[type=text],.login-box input[type=password]{
+  width:98%;padding:11px;border-radius:8px;
+  font-size:1.04rem;
+  border:none;background:#173460;color:#fff;
+  box-shadow:0 1px 2px #0002;
+  outline:none;margin-bottom:11px;
+  transition:.15s;
+  letter-spacing:.5px;
+}
+.login-box input:focus{background:#233c65;}
+.login-btn{
+  background:var(--primary);
+  color:#fff;
+  border:0;
+  border-radius:10px;
+  padding:12px 0;
+  font-size:1.09rem;
+  width:100%;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:4px;
+  box-shadow:0 2px 15px #06b6d450;
+  transition:background .2s;
+}
+.login-btn:hover{background:var(--accent);}
+.error-login{
+  color:#f68;
+  margin-top:2px;margin-bottom:-3px;
+  font-size:.98rem;
+  min-height:19px;
+  text-align:center;
+}
+@media(max-width:680px){
+  main{padding:12px 1vw;}
+  .login-box{padding:17px 9vw;}
+  input[type=number]{font-size:.98rem;padding:8px;}
+  h2{font-size:1.03rem;}
+  .rates-table label{font-size:.99rem;}
+  .login-title{font-size:1.07rem;}
+}
   </style>
 </head>
 <body>
-<main>
+<div class="login-overlay" id="loginOverlay">
+  <form class="login-box" id="loginForm" onsubmit="return loginAdmin(event)">
+    <div class="login-title">Connexion Admin</div>
+    <label class="login-label" for="username">Nom d'utilisateur</label>
+    <input type="text" id="username" autocomplete="username" required placeholder="Nom d'utilisateur">
+    <label class="login-label" for="password">Mot de passe</label>
+    <input type="password" id="password" autocomplete="current-password" required minlength="8" placeholder="Mot de passe">
+    <button class="login-btn" type="submit">Se connecter</button>
+    <div id="loginError" class="error-login"></div>
+  </form>
+</div>
+<main style="display:none;" id="adminPanel">
   <h2>Admin: Modifier les taux</h2>
-  <p>Base: <b>1 CFA</b>. Pour changer le taux, indiquez combien de chaque devise vaut 1 CFA.</p>
+  <p>Base : <b>1 CFA</b>. Pour changer le taux, indiquez combien de chaque devise vaut 1 CFA.</p>
   <form id="ratesForm">
     <table class="rates-table">
       <tr><td><label for="rateNGN">Naira (NGN):</label></td><td><input type="number" id="rateNGN" min="0" step="any"></td></tr>
@@ -50,20 +183,34 @@
     <button type="button" class="btn" onclick="updateRates()">Sauvegarder</button>
     <div class="success" id="successMsg"></div>
   </form>
-  <div style="margin-top:22px;">
-    <b>Notes:</b>
+  <div style="margin-top:8px;">
+    <b>Notes :</b>
     <ul>
-      <li>Ces taux ne sont sauvegardés que pour cette session et appareil (pour backend réel, contactez votre développeur).</li>
-      <li>Après sauvegarde, retournez à la page d'accueil et rechargez pour appliquer les nouveaux taux.</li>
+      <li>Ces taux sont enregistrés sur cet appareil (LocalStorage web seulement).</li>
+      <li>Après sauvegarde, retournez à l'accueil et rechargez pour appliquer les nouveaux taux.</li>
     </ul>
   </div>
 </main>
 <div class="footer">
-  © 2025 Abdel Cameroun Exchange Admin<br>
-  <a href="index.html" style="color:#8ef;">← Accueil</a>
+  © 2025 Abdel Cameroun Exchange Admin | 
+  <a href="index.html">← Accueil</a>
 </div>
 <script>
-// Initialize with default rates
+const USERNAME = "Abdel56";
+const PASSWORD = "Abdel5633@";
+function loginAdmin(e){
+  e.preventDefault();
+  const uname = document.getElementById('username').value.trim();
+  const pwd = document.getElementById('password').value;
+  if(uname === USERNAME && pwd === PASSWORD){
+    document.getElementById('loginOverlay').style.display = "none";
+    document.getElementById('adminPanel').style.display = "";
+    initRatesFields();
+    return false;
+  }
+  document.getElementById('loginError').innerText = "Nom d'utilisateur ou mot de passe incorrect.";
+  return false;
+}
 const defaultRates = {
   NGN: 0.22,
   XOF: 1,
@@ -73,18 +220,20 @@ const defaultRates = {
   TRX: 0.3,
   SOL: 0.00003
 };
-
-// On page load, fill the fields with stored or default rates
-window.onload = function() {
-  const stored = JSON.parse(localStorage.getItem('exchangeRates')) || defaultRates;
-  document.getElementById('rateNGN').value = stored.NGN;
-  document.getElementById('rateXOF').value = stored.XOF;
-  document.getElementById('rateUSDT').value = stored.USDT;
-  document.getElementById('rateBTC').value = stored.BTC;
-  document.getElementById('rateXRP').value = stored.XRP;
-  document.getElementById('rateTRX').value = stored.TRX;
-  document.getElementById('rateSOL').value = stored.SOL;
-};
+// On user valid login, fill the fields with stored or default rates
+function initRatesFields() {
+  // Timeout to prevent autofill race
+  setTimeout(()=> {
+    const stored = JSON.parse(localStorage.getItem('exchangeRates')) || defaultRates;
+    document.getElementById('rateNGN').value = stored.NGN;
+    document.getElementById('rateXOF').value = stored.XOF;
+    document.getElementById('rateUSDT').value = stored.USDT;
+    document.getElementById('rateBTC').value = stored.BTC;
+    document.getElementById('rateXRP').value = stored.XRP;
+    document.getElementById('rateTRX').value = stored.TRX;
+    document.getElementById('rateSOL').value = stored.SOL;
+  }, 10);
+}
 
 function updateRates() {
   const newRates = {
@@ -97,7 +246,7 @@ function updateRates() {
     SOL: parseFloat(document.getElementById('rateSOL').value) || 0,
   };
   localStorage.setItem('exchangeRates', JSON.stringify(newRates));
-  document.getElementById('successMsg').innerText = "Taux modifiés avec succès !";
+  document.getElementById('successMsg').innerText = "Taux modifiés avec succès !";
 }
 </script>
 </body>
