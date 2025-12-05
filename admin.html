@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin | Abdel Cameroun Exchange</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg,#18325c,#071229);
+      color: #fff;
+      margin: 0; padding: 0;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    main {
+      max-width: 480px;
+      margin: 60px auto; padding: 26px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 16px; box-shadow: 0 2px 18px #0003;
+    }
+    h2{text-align: center;}
+    label{display:block;margin-bottom:4px;}
+    input[type=number]{
+      width:100%;padding:10px;margin-bottom:12px;
+      border-radius:8px;border:none;
+      background: #fff; color: #222;
+    }
+    .btn{padding:12px 30px;border:0;border-radius:10px;cursor:pointer;font-size:17px;background:#06b6d4;color:#fff;}
+    .rates-table{margin-bottom:18px;}
+    .rates-table td{padding:7px;}
+    .success{color:#59f;margin:12px 0;}
+    .footer{text-align:center;margin-top:auto;padding:16px;color:rgba(255,255,255,0.7);}
+    @media(max-width:600px){main{padding:8px;}}
+  </style>
+</head>
+<body>
+<main>
+  <h2>Admin: Modifier les taux</h2>
+  <p>Base: <b>1 CFA</b>. Pour changer le taux, indiquez combien de chaque devise vaut 1 CFA.</p>
+  <form id="ratesForm">
+    <table class="rates-table">
+      <tr><td><label for="rateNGN">Naira (NGN):</label></td><td><input type="number" id="rateNGN" min="0" step="any"></td></tr>
+      <tr><td><label for="rateXOF">XOF:</label></td><td><input type="number" id="rateXOF" min="0" step="any"></td></tr>
+      <tr><td><label for="rateUSDT">USDT:</label></td><td><input type="number" id="rateUSDT" min="0" step="any"></td></tr>
+      <tr><td><label for="rateBTC">BTC:</label></td><td><input type="number" id="rateBTC" min="0" step="any"></td></tr>
+      <tr><td><label for="rateXRP">XRP:</label></td><td><input type="number" id="rateXRP" min="0" step="any"></td></tr>
+      <tr><td><label for="rateTRX">TRX:</label></td><td><input type="number" id="rateTRX" min="0" step="any"></td></tr>
+      <tr><td><label for="rateSOL">SOL:</label></td><td><input type="number" id="rateSOL" min="0" step="any"></td></tr>
+    </table>
+    <button type="button" class="btn" onclick="updateRates()">Sauvegarder</button>
+    <div class="success" id="successMsg"></div>
+  </form>
+  <div style="margin-top:22px;">
+    <b>Notes:</b>
+    <ul>
+      <li>Ces taux ne sont sauvegardés que pour cette session et appareil (pour backend réel, contactez votre développeur).</li>
+      <li>Après sauvegarde, retournez à la page d'accueil et rechargez pour appliquer les nouveaux taux.</li>
+    </ul>
+  </div>
+</main>
+<div class="footer">
+  © 2025 Abdel Cameroun Exchange Admin<br>
+  <a href="index.html" style="color:#8ef;">← Accueil</a>
+</div>
+<script>
+// Initialize with default rates
+const defaultRates = {
+  NGN: 0.22,
+  XOF: 1,
+  USDT: 0.0014,
+  BTC: 0.00000003,
+  XRP: 0.25,
+  TRX: 0.3,
+  SOL: 0.00003
+};
+
+// On page load, fill the fields with stored or default rates
+window.onload = function() {
+  const stored = JSON.parse(localStorage.getItem('exchangeRates')) || defaultRates;
+  document.getElementById('rateNGN').value = stored.NGN;
+  document.getElementById('rateXOF').value = stored.XOF;
+  document.getElementById('rateUSDT').value = stored.USDT;
+  document.getElementById('rateBTC').value = stored.BTC;
+  document.getElementById('rateXRP').value = stored.XRP;
+  document.getElementById('rateTRX').value = stored.TRX;
+  document.getElementById('rateSOL').value = stored.SOL;
+};
+
+function updateRates() {
+  const newRates = {
+    NGN: parseFloat(document.getElementById('rateNGN').value) || 0,
+    XOF: parseFloat(document.getElementById('rateXOF').value) || 0,
+    USDT: parseFloat(document.getElementById('rateUSDT').value) || 0,
+    BTC: parseFloat(document.getElementById('rateBTC').value) || 0,
+    XRP: parseFloat(document.getElementById('rateXRP').value) || 0,
+    TRX: parseFloat(document.getElementById('rateTRX').value) || 0,
+    SOL: parseFloat(document.getElementById('rateSOL').value) || 0,
+  };
+  localStorage.setItem('exchangeRates', JSON.stringify(newRates));
+  document.getElementById('successMsg').innerText = "Taux modifiés avec succès !";
+}
+</script>
+</body>
+</html>
